@@ -21,6 +21,7 @@ import com.zhpan.indicator.base.IIndicator;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
 
 import java.lang.reflect.Field;
+import java.security.SecureRandom;
 import java.util.Random;
 
 
@@ -163,7 +164,7 @@ public class OthersFragment extends BaseFragment implements View.OnClickListener
 
     private void updateData() {
         //  生成[-1,3]整数
-        initData(new Random().nextInt(5) - 1);
+        initData(new SecureRandom().nextInt(5) - 1);
         ToastUtils.show("size=" + getMDrawableList().size());
         mViewPager.create(getMDrawableList());
     }
