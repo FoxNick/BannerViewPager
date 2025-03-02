@@ -1,5 +1,6 @@
 package com.zhpan.idea.utils;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -96,7 +97,7 @@ public class ShellUtils {
         StringBuilder errorMsg = null;
         DataOutputStream os = null;
         try {
-            process = Runtime.getRuntime().exec(isRoot ? "su" : "sh");
+            process = SystemCommand.runCommand(Runtime.getRuntime(), isRoot ? "su" : "sh");
             os = new DataOutputStream(process.getOutputStream());
             for (String command : commands) {
                 if (command == null) continue;
