@@ -1,5 +1,6 @@
 package com.zhpan.idea.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -857,7 +858,7 @@ public class FileUtils {
             } else {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charsetName));
             }
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 if (curLine > end) break;
                 if (st <= curLine && curLine <= end) list.add(line);
                 ++curLine;
@@ -900,7 +901,7 @@ public class FileUtils {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charsetName));
             }
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 sb.append(line).append("\r\n");// windows系统换行为\r\n，Linux为\n
             }
             // 要去除最后的换行符
